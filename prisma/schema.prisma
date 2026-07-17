@@ -1,0 +1,84 @@
+datasource db {
+  provider = "postgresql"
+}
+
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "binary"
+}
+
+model User {
+  id        String    @id @default(uuid())
+  name      String?
+  email     String    @unique
+  password  String
+  role      String    @default("CUSTOMER") // "ADMIN", "CUSTOMER"
+  phone     String?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  bookings  Booking[]
+}
+
+model Booking {
+  id            String   @id @default(uuid())
+  userId        String?
+  user          User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  customerName  String
+  customerEmail String
+  customerPhone String
+  notes         String?
+  date          DateTime
+  startTime     String   // e.g. "10:00"
+  endTime       String   // e.g. "12:00"
+  duration      String   // "1 hour", "2 hours", "3 hours", "4 hours", "Half Day", "Full Day"
+  status        String   @default("PENDING") // "PENDING", "CONFIRMED", "CANCELLED", "COMPLETED"
+  price         Float
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Pricing {
+  id          String   @id @default(uuid())
+  duration    String   @unique
+  price       Float
+  label       String
+  description String?
+}
+
+model Gallery {
+  id        String   @id @default(uuid())
+  url       String
+  title     String?
+  category  String?
+  createdAt DateTime @default(now())
+}
+
+model Testimonial {
+  id        String   @id @default(uuid())
+  name      String
+  role      String?
+  avatar    String?
+  rating    Int      @default(5)
+  comment   String
+  createdAt DateTime @default(now())
+}
+
+model Settings {
+  id         String @id @default("default")
+  studioName String @default("Studio Lux")
+  address    String @default("123 Luxury Ave, Beverly Hills, CA")
+  phone      String @default("+1 310-555-0199")
+  whatsapp   String @default("+1 310-555-0199")
+  instagram  String @default("luxstudio")
+  email      String @default("booking@luxstudio.com")
+  hourlyRate Float  @default(30.0)
+}
+
+model OperatingHours {
+  id        String   @id @default(uuid())
+  dayOfWeek Int      @unique // 0 = Sunday, 1 = Monday, etc.
+  openTime  String   @default("10:00")
+  closeTime String   @default("22:00")
+  isOpen    Boolean  @default(true)
+}

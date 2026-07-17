@@ -1,0 +1,220 @@
+{
+  "users": [
+    {
+      "id": "admin-user-id",
+      "name": "Admin User",
+      "email": "admin@studio.com",
+      "password": "$2b$10$MHjrLlDuQ8TmJDU6vcFa4ehkuwh3ZV/qY0m9WgfTc14bdSf8LPZxy",
+      "role": "ADMIN",
+      "phone": "+1 555-0100",
+      "createdAt": "2026-07-17T08:52:30.370Z",
+      "updatedAt": "2026-07-17T08:52:30.381Z"
+    },
+    {
+      "id": "customer-user-id",
+      "name": "Jane Doe",
+      "email": "customer@studio.com",
+      "password": "$2b$10$GmsdV1Dw9dTdrfF7BOX2Ke/eIHzIiboSs9KMC5gmWOQcS5.kJ./vC",
+      "role": "CUSTOMER",
+      "phone": "+1 555-0200",
+      "createdAt": "2026-07-17T08:52:30.381Z",
+      "updatedAt": "2026-07-17T08:52:30.381Z"
+    }
+  ],
+  "bookings": [
+    {
+      "id": "booking-2",
+      "userId": null,
+      "customerName": "Alex Smith",
+      "customerEmail": "alex@example.com",
+      "customerPhone": "+1 555-9876",
+      "notes": "Bringing a pet for portrait photos.",
+      "date": "2026-07-18T00:00:00.000Z",
+      "startTime": "16:00",
+      "endTime": "17:00",
+      "duration": "1 hour",
+      "status": "PENDING",
+      "price": 30,
+      "createdAt": "2026-07-17T08:52:30.383Z",
+      "updatedAt": "2026-07-17T08:52:30.383Z"
+    }
+  ],
+  "pricing": [
+    {
+      "id": "p-1",
+      "duration": "Lite",
+      "price": 39000,
+      "label": "Lite",
+      "description": "1 - 4 Person\n8 Minutes\nFree All Soft File"
+    },
+    {
+      "id": "p-2",
+      "duration": "Twin",
+      "price": 49000,
+      "label": "Twin",
+      "description": "1 - 2 Person\n10 minutes\nFree All Soft File\n1 Printed 4R"
+    },
+    {
+      "id": "p-3",
+      "duration": "Squad",
+      "price": 89000,
+      "label": "Squad",
+      "description": "1 - 4 Person\n15 minutes\nFree All Soft File\n1 Printed 4R"
+    },
+    {
+      "id": "p-4",
+      "duration": "Family",
+      "price": 119000,
+      "label": "Family",
+      "description": "1 - 6 Person\n20 minutes\nFree All Soft File\n2 Printed 4R"
+    },
+    {
+      "id": "p-5",
+      "duration": "Crew",
+      "price": 179000,
+      "label": "Crew",
+      "description": "1 - 10 Person\n25 minutes\nFree All Soft File\n4 Printed 4R"
+    },
+    {
+      "id": "p-6",
+      "duration": "Party",
+      "price": 229000,
+      "label": "Party",
+      "description": "1 - 10 Person\n45 minutes\nFree All Soft File\n6 Printed 4R"
+    }
+  ],
+  "gallery": [
+    {
+      "id": "g-1",
+      "url": "/images/gallery/1.jpeg",
+      "title": "Professional Studio Setup",
+      "category": "Studio",
+      "createdAt": "2026-07-17T08:52:30.383Z"
+    },
+    {
+      "id": "g-2",
+      "url": "/images/gallery/2.jpeg",
+      "title": "Natural Light Studio Space",
+      "category": "Studio",
+      "createdAt": "2026-07-17T08:52:30.383Z"
+    },
+    {
+      "id": "g-3",
+      "url": "/images/gallery/3.jpeg",
+      "title": "Editorial Portrait",
+      "category": "Portrait",
+      "createdAt": "2026-07-17T08:52:30.383Z"
+    },
+    {
+      "id": "g-4",
+      "url": "/images/gallery/4.jpg",
+      "title": "High-Fashion Shoot",
+      "category": "Fashion",
+      "createdAt": "2026-07-17T08:52:30.383Z"
+    },
+    {
+      "id": "g-5",
+      "url": "/images/gallery/5.jpg",
+      "title": "Creative Lighting Portrait",
+      "category": "Portrait",
+      "createdAt": "2026-07-17T08:52:30.383Z"
+    },
+    {
+      "id": "g-6",
+      "url": "/images/gallery/6.jpg",
+      "title": "Product Commercial Photography",
+      "category": "Product",
+      "createdAt": "2026-07-17T08:52:30.383Z"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t-1",
+      "name": "Sophia Martinez",
+      "role": "Fashion Photographer",
+      "comment": "GET STUDIO is my go-to creative space. The setup is clean, the booking flow is easy, and the photo booth experience feels polished and fun!",
+      "rating": 5,
+      "avatar": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150",
+      "createdAt": "2026-07-17T08:52:30.383Z"
+    },
+    {
+      "id": "t-2",
+      "name": "Marcus Vance",
+      "role": "Creative Director",
+      "comment": "We booked the full-day session for our brand's winter campaign. The staff was super helpful, setting up the custom color backdrops before we even arrived. 10/10 service.",
+      "rating": 5,
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150",
+      "createdAt": "2026-07-17T08:52:30.383Z"
+    },
+    {
+      "id": "t-3",
+      "name": "Emily Chen",
+      "role": "Portrait Client",
+      "comment": "Clean, elegant, and professional. The booking system was very straightforward, and I loved being able to see live availability. My family portraits came out beautiful.",
+      "rating": 5,
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150",
+      "createdAt": "2026-07-17T08:52:30.383Z"
+    }
+  ],
+  "settings": {
+    "id": "default",
+    "studioName": "GET STUDIO",
+    "address": "Jakarta, Indonesia",
+    "phone": "+62 812-3456-7890",
+    "whatsapp": "+62 812-3456-7890",
+    "instagram": "@getstudio",
+    "email": "hello@getstudio.id",
+    "hourlyRate": 39000
+  },
+  "operatingHours": [
+    {
+      "id": "h-0",
+      "dayOfWeek": 0,
+      "openTime": "10:00",
+      "closeTime": "22:00",
+      "isOpen": true
+    },
+    {
+      "id": "h-1",
+      "dayOfWeek": 1,
+      "openTime": "10:00",
+      "closeTime": "22:00",
+      "isOpen": true
+    },
+    {
+      "id": "h-2",
+      "dayOfWeek": 2,
+      "openTime": "10:00",
+      "closeTime": "22:00",
+      "isOpen": true
+    },
+    {
+      "id": "h-3",
+      "dayOfWeek": 3,
+      "openTime": "10:00",
+      "closeTime": "22:00",
+      "isOpen": true
+    },
+    {
+      "id": "h-4",
+      "dayOfWeek": 4,
+      "openTime": "10:00",
+      "closeTime": "22:00",
+      "isOpen": true
+    },
+    {
+      "id": "h-5",
+      "dayOfWeek": 5,
+      "openTime": "10:00",
+      "closeTime": "22:00",
+      "isOpen": true
+    },
+    {
+      "id": "h-6",
+      "dayOfWeek": 6,
+      "openTime": "10:00",
+      "closeTime": "22:00",
+      "isOpen": true
+    }
+  ]
+}

@@ -43,24 +43,49 @@ export function minutesToTime(minutes: number): string {
 // Calculate End Time based on Start Time and Package
 export function calculateEndTime(startTime: string, duration: string): string {
   const startMin = timeToMinutes(startTime);
+
+  // Pricing.duration strings come from DB.
+  // In your current seed/setup, duration options represent:
+  // - "Lite" "Twin" "Squad" "Family" "Crew" "Party" (package names)
+  // - "1 hour" (time length)
+  // - (older versions may have used "2 hours" etc.)
+  const normalized = duration.trim().toLowerCase();
+
   let durationMinutes = 60;
 
-  switch (duration.toLowerCase()) {
-    case "lite":
-    case "twin":
-    case "squad":
-    case "family":
-    case "crew":
-    case "party":
-    case "1 hour":
-    case "2 hours":
-    case "3 hours":
-    case "4 hours":
-    case "half day":
-    case "full day":
-    default:
-      durationMinutes = 60;
-      break;
+  // Explicit numeric durations first
+  if (normalized === "1 hour") durationMinutes = 60;
+  else if (normalized === "2 hours") durationMinutes = 120;
+  else if (normalized === "3 hours") durationMinutes = 180;
+  else if (normalized === "4 hours") durationMinutes = 240;
+  else if (normalized === "half day") durationMinutes = 240;
+  else if (normalized === "full day") durationMinutes = 480;
+  else {
+    // If duration is actually a package name, map to a sensible length.
+    // Current UI uses pricing.duration from DB, so map the known packages.
+    switch (normalized) {
+      case "lite":
+        durationMinutes = 60;
+        break;
+      case "twin":
+        durationMinutes = 60;
+        break;
+      case "squad":
+        durationMinutes = 60;
+        break;
+      case "family":
+        durationMinutes = 60;
+        break;
+      case "crew":
+        durationMinutes = 60;
+        break;
+      case "party":
+        durationMinutes = 60;
+        break;
+      default:
+        durationMinutes = 60;
+        break;
+    }
   }
 
   const endMin = startMin + durationMinutes;

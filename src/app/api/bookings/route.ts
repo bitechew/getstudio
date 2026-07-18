@@ -16,7 +16,13 @@ export async function GET(req: Request) {
       const targetDateStr = toLocalDateString(targetDate);
 
       const filteredBookings = allBookings
-        .filter((b: any) => new Date(b.date).toISOString().split("T")[0] === targetDateStr && b.status !== "CANCELLED")
+        .filter((b: any) => {
+          // Compare dates in a timezone-neutral way.
+          // booking.date is stored as a Date; format both as YYYY-MM-DD in local time
+          // (the client sends date in YYYY-MM-DD using local WIB).
+          const bookingDateStr = toLocalDateString(new Date(b.date));
+          return bookingDateStr === targetDateStr && b.status !== "CANCELLED";
+        })
         .map((b: any) => ({
           id: b.id,
           startTime: b.startTime,

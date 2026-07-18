@@ -13,8 +13,11 @@ import {
 
 let isDbConnected: boolean | null = null;
 
-function getPrismaClient(): any {
-  return prisma as any;
+function getPrismaClient() {
+  if (!prisma) {
+    throw new Error("Prisma client is not available");
+  }
+  return prisma;
 }
 
 export async function checkDbConnection(): Promise<boolean> {
@@ -75,16 +78,29 @@ export const userService = {
   },
 
   async create(data: any) {
-    const isDb = await checkDbConnection();
-    const emailLower = data.email.toLowerCase();
+     const isDb = await checkDbConnection();
+
+    console.log("isDb =", isDb);
+    console.log("DATABASE_URL =", process.env.DATABASE_URL);
+
     if (isDb) {
-      try {
-        const client = getPrismaClient();
-        return await client.user.create({ data: { ...data, email: emailLower } });
-      } catch (err) {
-        console.error("DB create failed, fallback to JSON", err);
-      }
+        try {
+            const client = getPrismaClient();
+
+            console.log("Using PostgreSQL");
+
+            return await client.booking.create({
+                data,
+            });
+
+        } catch (err) {
+            console.error("Prisma error:", err);
+            throw err;
+        }
     }
+
+    console.log("USING FALLBACK JSON DATABASE");
+
     const db = readFallbackDb();
     const newUser: FallbackUser = {
       id: Math.random().toString(36).substring(2, 11),
@@ -143,9 +159,9 @@ export const userService = {
 export const bookingService = {
   async findMany() {
     const isDb = await checkDbConnection();
+    const client = getPrismaClient();
     if (isDb) {
       try {
-        const client = getPrismaClient();
         return await client.booking.findMany({ orderBy: { date: "asc" } });
       } catch (err) {
         console.error("DB findMany failed, fallback to JSON", err);
@@ -195,7 +211,8 @@ export const bookingService = {
         const client = getPrismaClient();
         return await client.booking.create({ data });
       } catch (err) {
-        console.error("DB create failed, fallback to JSON", err);
+        console.error("DB create failed", err);
+        throw err;
       }
     }
     const db = readFallbackDb();
@@ -227,7 +244,8 @@ export const bookingService = {
         const client = getPrismaClient();
         return await client.booking.update({ where: { id }, data });
       } catch (err) {
-        console.error("DB update failed, fallback to JSON", err);
+        console.error("DB update failed", err);
+        throw err;
       }
     }
     const db = readFallbackDb();
@@ -251,7 +269,8 @@ export const bookingService = {
         const client = getPrismaClient();
         return await client.booking.delete({ where: { id } });
       } catch (err) {
-        console.error("DB delete failed, fallback to JSON", err);
+        console.error("DB delete failed", err);
+        throw err;
       }
     }
     const db = readFallbackDb();

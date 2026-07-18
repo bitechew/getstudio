@@ -102,6 +102,8 @@ export const userService = {
     console.log("USING FALLBACK JSON DATABASE");
 
     const db = readFallbackDb();
+    const emailLower = String(data.email || "").toLowerCase();
+
     const newUser: FallbackUser = {
       id: Math.random().toString(36).substring(2, 11),
       name: data.name || null,

@@ -114,9 +114,10 @@ export async function POST(req: Request) {
 
     // Double booking check (overlapping slots validation)
     const allBookings = await bookingService.findMany();
-    const dateBookings = allBookings.filter(
-      (b: any) => new Date(b.date).toISOString().split("T")[0] === bookingDateStr
-    );
+    const dateBookings = allBookings.filter((b: any) => {
+      const bookingDateStrForBooking = toLocalDateString(new Date(b.date));
+      return bookingDateStrForBooking === bookingDateStr;
+    });
 
     const hasOverlap = checkOverlap(startTime, endTime, dateBookings);
     if (hasOverlap) {
